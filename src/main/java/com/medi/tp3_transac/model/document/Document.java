@@ -21,11 +21,10 @@ public abstract class Document {
     private int publicationYear;
     private int copies = 1;
 
-    public Document(String title, String author, String genre, int publicationYear, int copies) {
+    public Document(String title, String author, String genre, int publicationYear) {
         this.title = title;
         this.author = author;
         this.genre = genre;
         this.publicationYear = publicationYear;
-        this.copies = copies;
     }
 }

@@ -15,8 +15,8 @@ public class Book extends Document{
     private String publisher;
     private int pages;
 
-    public Book(String title, String author, String genre, int publicationYear, int copies, String publisher, int pages) {
-        super(title, author, genre, publicationYear, copies);
+    public Book(String title, String author, String genre, int publicationYear, String publisher, int pages) {
+        super(title, author, genre, publicationYear);
         this.publisher = publisher;
         this.pages = pages;
     }
