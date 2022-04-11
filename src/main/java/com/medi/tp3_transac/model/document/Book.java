@@ -14,4 +14,10 @@ public class Book extends Document{
     public final static int BORROW_TIME_IN_WEEKS = 3;
     private String publisher;
     private int pages;
+
+    public Book(String title, String author, String genre, int publicationYear, int copies, String publisher, int pages) {
+        super(title, author, genre, publicationYear, copies);
+        this.publisher = publisher;
+        this.pages = pages;
+    }
 }

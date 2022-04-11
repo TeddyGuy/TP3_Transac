@@ -20,4 +20,12 @@ public abstract class Document {
     private String genre;
     private int publicationYear;
     private int copies = 1;
+
+    public Document(String title, String author, String genre, int publicationYear, int copies) {
+        this.title = title;
+        this.author = author;
+        this.genre = genre;
+        this.publicationYear = publicationYear;
+        this.copies = copies;
+    }
 }

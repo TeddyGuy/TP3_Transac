@@ -11,7 +11,6 @@ import javax.persistence.Entity;
 @EqualsAndHashCode(callSuper = true)
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 @DiscriminatorValue("CD")
 public class CD extends Document{
