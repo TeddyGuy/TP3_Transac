@@ -1,6 +1,7 @@
 package com.medi.tp3_transac.model;
 
 import com.medi.tp3_transac.model.document.Document;
+import com.medi.tp3_transac.model.user.Client;
 import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -19,8 +20,8 @@ public class DocumentLoan {
     private Document document;
     private LocalDate lendingDate;
     private LocalDate expectedReturnDate;
-    //@ManyToOne
-    //@JoinColumn(name = "client_id")
-    //@ToString.Exclude
-    //private Client client;
+    @ManyToOne
+    @JoinColumn(name = "client_id")
+    @ToString.Exclude
+    private Client client;
 }
