@@ -2,6 +2,7 @@ package com.medi.tp3_transac.service;
 
 import com.medi.tp3_transac.model.document.Book;
 import com.medi.tp3_transac.model.document.CD;
+import com.medi.tp3_transac.model.document.DVD;
 import com.medi.tp3_transac.repository.ClientRepository;
 import com.medi.tp3_transac.repository.DocumentLoanRepository;
 import com.medi.tp3_transac.repository.DocumentRepository;
@@ -27,5 +28,9 @@ public class AdminService {
 
     public long saveCD(String title, String author, String genre, int publicationYear){
         return this.documentRepository.save(new CD(title,author,genre,publicationYear)).getId();
+    }
+
+    public long saveDVD(String title, String author, String genre, int publicationYear){
+        return this.documentRepository.save(new DVD(title,author,genre,publicationYear)).getId();
     }
 }

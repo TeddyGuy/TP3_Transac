@@ -14,4 +14,8 @@ import javax.persistence.Entity;
 @DiscriminatorValue("DVD")
 public class DVD extends Document{
     public final static int BORROW_TIME_IN_WEEK = 2;
+
+    public DVD(String title, String author, String genre, int publicationYear) {
+        super(title, author, genre, publicationYear);
+    }
 }
