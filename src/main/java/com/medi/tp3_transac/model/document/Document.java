@@ -9,7 +9,7 @@ import javax.persistence.*;
 @Data
 @NoArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
-@DiscriminatorColumn(name="DocumentType",
+@DiscriminatorColumn(name="documentType",
         discriminatorType = DiscriminatorType.STRING)
 public abstract class Document {
     @Id

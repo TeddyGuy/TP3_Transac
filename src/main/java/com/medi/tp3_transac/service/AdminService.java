@@ -5,6 +5,7 @@ import com.medi.tp3_transac.model.document.CD;
 import com.medi.tp3_transac.model.document.DVD;
 import com.medi.tp3_transac.model.document.Document;
 import com.medi.tp3_transac.model.user.Client;
+import com.medi.tp3_transac.repository.BookRepository;
 import com.medi.tp3_transac.repository.ClientRepository;
 import com.medi.tp3_transac.repository.DocumentLoanRepository;
 import com.medi.tp3_transac.repository.DocumentRepository;
@@ -18,13 +19,16 @@ public class AdminService {
     private ClientRepository clientRepository;
     private DocumentRepository documentRepository;
     private DocumentLoanRepository documentLoanRepository;
+    private BookRepository bookRepository;
 
     public AdminService(ClientRepository clientRepository,
                         DocumentRepository documentRepository,
-                        DocumentLoanRepository documentLoanRepository) {
+                        DocumentLoanRepository documentLoanRepository,
+                        BookRepository bookRepository) {
         this.clientRepository = clientRepository;
         this.documentRepository = documentRepository;
         this.documentLoanRepository = documentLoanRepository;
+        this.bookRepository = bookRepository;
     }
 
     public long saveBook(String title, String author, String genre, int publicationYear, String publisher, int pages){
@@ -41,6 +45,10 @@ public class AdminService {
 
     public List<Document> findAllDocuments(){
         return this.documentRepository.findAll();
+    }
+
+    public List<Book> findAllBooks(){
+        return this.bookRepository.findAll();
     }
 
     public int addCopiesToDocumentWithId(int nbCopies, long documentId){

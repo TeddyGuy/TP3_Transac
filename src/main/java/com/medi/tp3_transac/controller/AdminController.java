@@ -48,7 +48,7 @@ public class AdminController {
     @GetMapping("/documents")
     public String getDocumentsRequest(Model model){
         model.addAttribute("pageTitle","JavaTown Library System");
-        model.addAttribute("documents", adminService.findAllDocuments());
+        model.addAttribute("books", adminService.findAllBooks());
         return "documents";
     }
 
@@ -57,5 +57,11 @@ public class AdminController {
         model.addAttribute("pageTitle","JavaTown Library System");
         model.addAttribute("bookForm", new BookForm());
         return "add-book";
+    }
+
+    @PostMapping("add-book")
+    public String postAddBook(@ModelAttribute BookForm bookForm){
+        adminService.saveBook(bookForm.getTitle(),bookForm.getAuthor(),bookForm.getGenre(),bookForm.getPublicationYear(),bookForm.getPublisher(), bookForm.getPages());
+        return "redirect:documents";
     }
 }
