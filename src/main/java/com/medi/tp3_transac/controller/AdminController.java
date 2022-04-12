@@ -4,7 +4,11 @@ import com.medi.tp3_transac.dto.ClientForm;
 import com.medi.tp3_transac.service.AdminService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 public class AdminController {
@@ -32,5 +36,11 @@ public class AdminController {
         model.addAttribute("pageTitle","JavaTown Library System");
         model.addAttribute("clientForm", new ClientForm());
         return "register-client";
+    }
+
+    @PostMapping("/register-client")
+    public String postRegisterClientRequest(@ModelAttribute ClientForm clientForm, Model model, BindingResult errors, RedirectAttributes redirectAttributes){
+        adminService.saveClient(clientForm.getUsername(),clientForm.getPassword(),clientForm.getEmail());
+        return "redirect:clients";
     }
 }
