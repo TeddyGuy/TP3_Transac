@@ -8,10 +8,25 @@
 <body>
     <h1>Client list</h1>
     <h2>Number of clients : <span th:text="${clients.size()}"></span></h2>
-    <div th:if="${clients.size() > 0}">
-        <thead>
-            
-        </thead>
+    <div th:if="${clients.size() > 0}" class="w-50 m-auto my-5">
+        <table class="table table-borderless table-hover">
+            <thead class="table-dark">
+                <th>ID</th>
+                <th>User name</th>
+                <th>Email</th>
+            </thead>
+            <tbody>
+                <th:block th:each="client, stat : ${clients}">
+                    <tr>
+                        <td th:text="${client.id}"></td>
+                        <td th:text="${client.username}"></td>
+                        <td th:text="${client.email}"></td>
+                    </tr>
+                </th:block>
+            </tbody>
+        </table>
+        
+
     </div>
     
 </body>
