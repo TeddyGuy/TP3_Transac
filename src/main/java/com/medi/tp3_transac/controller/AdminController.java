@@ -1,5 +1,6 @@
 package com.medi.tp3_transac.controller;
 
+import com.medi.tp3_transac.dto.BookForm;
 import com.medi.tp3_transac.dto.ClientForm;
 import com.medi.tp3_transac.service.AdminService;
 import org.springframework.stereotype.Controller;
@@ -49,5 +50,12 @@ public class AdminController {
         model.addAttribute("pageTitle","JavaTown Library System");
         model.addAttribute("documents", adminService.findAllDocuments());
         return "documents";
+    }
+
+    @GetMapping("/add-book")
+    public String getAddDocumentRequest(Model model){
+        model.addAttribute("pageTitle","JavaTown Library System");
+        model.addAttribute("bookForm", new BookForm());
+        return "add-book";
     }
 }
