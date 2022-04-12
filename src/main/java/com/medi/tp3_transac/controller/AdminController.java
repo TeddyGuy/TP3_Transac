@@ -18,4 +18,10 @@ public class AdminController {
         model.addAttribute("pageTitle","JavaTown Library System");
         return "index";
     }
+
+    @GetMapping("/clients")
+    public String getClientsRequest(Model model){
+        //model.addAttribute("clients",adminService.findAllClients());
+        return "clients";
+    }
 }
