@@ -1,5 +1,6 @@
 package com.medi.tp3_transac.controller;
 
+import com.medi.tp3_transac.dto.ClientForm;
 import com.medi.tp3_transac.service.AdminService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,6 +30,7 @@ public class AdminController {
     @GetMapping("/register-client")
     public String getRegisterClientRequest(Model model){
         model.addAttribute("pageTitle","JavaTown Library System");
+        model.addAttribute("clientForm", new ClientForm());
         return "register-client";
     }
 }
