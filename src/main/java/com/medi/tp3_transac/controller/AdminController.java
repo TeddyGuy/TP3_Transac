@@ -43,4 +43,11 @@ public class AdminController {
         adminService.saveClient(clientForm.getUsername().trim(),clientForm.getPassword(),clientForm.getEmail().trim());
         return "redirect:clients";
     }
+
+    @GetMapping("/documents")
+    public String getDocumentsRequest(Model model){
+        model.addAttribute("pageTitle","JavaTown Library System");
+        model.addAttribute("documents", adminService.findAllDocuments());
+        return "documents";
+    }
 }

@@ -39,6 +39,10 @@ public class AdminService {
         return this.documentRepository.save(new DVD(title,author,genre,publicationYear)).getId();
     }
 
+    public List<Document> findAllDocuments(){
+        return this.documentRepository.findAll();
+    }
+
     public int addCopiesToDocumentWithId(int nbCopies, long documentId){
         Optional<Document> potentialDocument = this.documentRepository.findById(documentId);
         if(potentialDocument.isPresent()){
