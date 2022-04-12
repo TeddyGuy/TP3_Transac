@@ -2,14 +2,18 @@ package com.medi.tp3_transac.controller;
 
 import com.medi.tp3_transac.dto.BookForm;
 import com.medi.tp3_transac.dto.ClientForm;
+import com.medi.tp3_transac.model.user.Client;
 import com.medi.tp3_transac.service.AdminService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import java.util.Optional;
 
 @Controller
 public class AdminController {
@@ -30,6 +34,13 @@ public class AdminController {
         model.addAttribute("pageTitle","JavaTown Library System");
         model.addAttribute("clients",adminService.findAllClients());
         return "clients";
+    }
+
+    @GetMapping("/client/{id}/borrowing-history")
+    public String getClientDocumentLoanHistory(Model model, @PathVariable String id){
+        model.addAttribute("pageTitle","JavaTown Library System");
+        model.addAttribute("client",adminService.findClientByIdWithBorrowingHistory(Long.parseLong(id)).get());
+        return "client-borrowing-history";
     }
 
     @GetMapping("/register-client")

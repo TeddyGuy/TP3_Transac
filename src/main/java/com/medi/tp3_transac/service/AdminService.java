@@ -51,6 +51,14 @@ public class AdminService {
         return this.bookRepository.findAll();
     }
 
+    public Optional<Client> findClientById(long id){
+        return this.clientRepository.findById(id);
+    }
+
+    public Optional<Client> findClientByIdWithBorrowingHistory(long id){
+        return this.clientRepository.findByIdWithDocumentLoans(id);
+    }
+
     public int addCopiesToDocumentWithId(int nbCopies, long documentId){
         Optional<Document> potentialDocument = this.documentRepository.findById(documentId);
         if(potentialDocument.isPresent()){

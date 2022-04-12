@@ -20,6 +20,7 @@ public class DocumentLoan {
     private Document document;
     private LocalDate lendingDate;
     private LocalDate expectedReturnDate;
+    private LocalDate actualReturnDate;
     @ManyToOne
     @JoinColumn(name = "client_id")
     @ToString.Exclude
