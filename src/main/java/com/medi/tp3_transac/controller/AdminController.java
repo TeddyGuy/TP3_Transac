@@ -21,7 +21,7 @@ public class AdminController {
 
     @GetMapping("/clients")
     public String getClientsRequest(Model model){
-        //model.addAttribute("clients",adminService.findAllClients());
+        model.addAttribute("clients",adminService.findAllClients());
         return "clients";
     }
 }

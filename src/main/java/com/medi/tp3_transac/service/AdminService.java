@@ -10,6 +10,7 @@ import com.medi.tp3_transac.repository.DocumentLoanRepository;
 import com.medi.tp3_transac.repository.DocumentRepository;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
 import java.util.Optional;
 
 @Component
@@ -51,5 +52,9 @@ public class AdminService {
 
     public long saveClient(String username, String password){
         return this.clientRepository.save(new Client(username, password)).getId();
+    }
+
+    public List<Client> findAllClients(){
+        return this.clientRepository.findAll();
     }
 }
