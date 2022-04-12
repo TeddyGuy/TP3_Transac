@@ -1,5 +1,6 @@
 package com.medi.tp3_transac.service;
 
+import com.medi.tp3_transac.model.DocumentLoan;
 import com.medi.tp3_transac.model.document.Book;
 import com.medi.tp3_transac.model.document.CD;
 import com.medi.tp3_transac.model.document.DVD;
@@ -68,6 +69,20 @@ public class AdminService {
             return this.documentRepository.save(document).getCopies();
         }
         return -1;
+    }
+
+    public void lendDocumentByIdToClientById(long documentId, long clientId){
+        Document document = this.documentRepository.findById(documentId).get();
+        Client client = this.clientRepository.findByIdWithDocumentLoans(clientId).get();
+        DocumentLoan documentLoan = new DocumentLoan(document,client);
+        if(document.getCopies() > 0){
+            client.getDocumentLoans().add(documentLoan);
+            document.setCopies(document.getCopies() - 1);
+            this.clientRepository.save(client);
+            this.documentLoanRepository.save(documentLoan);
+            this.documentRepository.save(document);
+        }
+
     }
 
     public long saveClient(String username, String password, String email){

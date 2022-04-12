@@ -2,6 +2,7 @@ package com.medi.tp3_transac.controller;
 
 import com.medi.tp3_transac.dto.BookForm;
 import com.medi.tp3_transac.dto.ClientForm;
+import com.medi.tp3_transac.dto.DocumentLoanForm;
 import com.medi.tp3_transac.model.user.Client;
 import com.medi.tp3_transac.service.AdminService;
 import org.springframework.stereotype.Controller;
@@ -70,9 +71,16 @@ public class AdminController {
         return "add-book";
     }
 
-    @PostMapping("add-book")
+    @PostMapping("/add-book")
     public String postAddBook(@ModelAttribute BookForm bookForm){
         adminService.saveBook(bookForm.getTitle(),bookForm.getAuthor(),bookForm.getGenre(),bookForm.getPublicationYear(),bookForm.getPublisher(), bookForm.getPages());
         return "redirect:documents";
+    }
+
+    @GetMapping("/lend-document")
+    public String getLendBookRequest(Model model){
+        model.addAttribute("pageTitle","JavaTown Library System");
+        model.addAttribute("documentLoanForm", new DocumentLoanForm());
+        return "lend-document";
     }
 }

@@ -1,5 +1,8 @@
 package com.medi.tp3_transac.model;
 
+import com.medi.tp3_transac.model.document.Book;
+import com.medi.tp3_transac.model.document.CD;
+import com.medi.tp3_transac.model.document.DVD;
 import com.medi.tp3_transac.model.document.Document;
 import com.medi.tp3_transac.model.user.Client;
 import lombok.*;
@@ -25,4 +28,19 @@ public class DocumentLoan {
     @JoinColumn(name = "client_id")
     @ToString.Exclude
     private Client client;
+
+    public DocumentLoan(Document document, Client client) {
+        this.document = document;
+        this.client = client;
+        this.lendingDate = LocalDate.now();
+        if (document instanceof Book){
+            this.expectedReturnDate = lendingDate.plusWeeks(Book.BORROW_TIME_IN_WEEKS);
+        }
+        else if (document instanceof DVD){
+            this.expectedReturnDate = lendingDate.plusWeeks(DVD.BORROW_TIME_IN_WEEK);
+        }
+        else {
+            this.expectedReturnDate = lendingDate.plusWeeks(CD.BORROW_TIME_IN_WEEK);
+        }
+    }
 }
