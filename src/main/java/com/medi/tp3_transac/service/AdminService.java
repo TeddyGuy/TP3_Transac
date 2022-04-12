@@ -50,8 +50,8 @@ public class AdminService {
         return -1;
     }
 
-    public long saveClient(String username, String password){
-        return this.clientRepository.save(new Client(username, password)).getId();
+    public long saveClient(String username, String password, String email){
+        return this.clientRepository.save(new Client(username, password, email)).getId();
     }
 
     public List<Client> findAllClients(){

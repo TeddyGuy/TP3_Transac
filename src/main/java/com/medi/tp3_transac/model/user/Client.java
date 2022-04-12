@@ -15,10 +15,12 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class Client extends User {
+    private String email;
     @OneToMany(mappedBy = "client")
     private List<DocumentLoan> documentLoans = new ArrayList<>();
 
-    public Client(String username, String password) {
+    public Client(String username, String password, String email) {
         super(username, password);
+        this.email = email;
     }
 }
