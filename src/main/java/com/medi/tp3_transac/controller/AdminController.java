@@ -5,6 +5,7 @@ import com.medi.tp3_transac.dto.ClientForm;
 import com.medi.tp3_transac.dto.DocumentLoanForm;
 import com.medi.tp3_transac.model.user.Client;
 import com.medi.tp3_transac.service.AdminService;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -52,7 +53,7 @@ public class AdminController {
     }
 
     @PostMapping("/register-client")
-    public String postRegisterClientRequest(@ModelAttribute ClientForm clientForm, Model model, BindingResult errors, RedirectAttributes redirectAttributes){
+    public String postRegisterClientRequest(@ModelAttribute ClientForm clientForm){
         adminService.saveClient(clientForm.getUsername().trim(),clientForm.getPassword(),clientForm.getEmail().trim());
         return "redirect:clients";
     }
@@ -78,9 +79,15 @@ public class AdminController {
     }
 
     @GetMapping("/lend-document")
-    public String getLendBookRequest(Model model){
+    public String getLendDocumentRequest(Model model){
         model.addAttribute("pageTitle","JavaTown Library System");
         model.addAttribute("documentLoanForm", new DocumentLoanForm());
         return "lend-document";
+    }
+
+    @PostMapping("/lend-document")
+    public String postLendDocumentRequest(@ModelAttribute DocumentLoanForm documentLoanForm){
+        adminService.lendDocumentByIdToClientById(documentLoanForm.getDocumentId(),documentLoanForm.getClientId());
+        return "redirect:/client/" + documentLoanForm.getClientId() + "/borrowing-history";
     }
 }

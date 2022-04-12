@@ -9,10 +9,10 @@
 <h1 class="bg-dark text-white py-3 ps-3">Number of documents : <span th:text="${books.size()}"></span></h1>
 <ul>
     <li>
-        <a th:href="@{'/'}">Home Page</a>
+        <a th:href="@{'/'}">Page d'accueil</a>
     </li>
     <li>
-        <a th:href="@{'/add-book'}">Add New Book</a>
+        <a th:href="@{'/add-book'}">Ajouter un livre</a>
     </li>
 </ul>
 <div th:if="${books.size() > 0}" class="w-50 m-auto my-5">
@@ -20,13 +20,13 @@
     <table class="table table-borderless table-hover">
         <thead class="table-dark">
         <th>ID</th>
-        <th>Title</th>
-        <th>Author</th>
+        <th>Titre</th>
+        <th>Auteur</th>
         <th>Genre</th>
-        <th>Publication Year</th>
-        <th>Publisher</th>
+        <th>Année de publication</th>
+        <th>Maison d'édition</th>
         <th>Pages</th>
-        <th>Available copies</th>
+        <th>Copies disponibles</th>
         </thead>
         <tbody>
         <th:block th:each="book, stat : ${books}">
