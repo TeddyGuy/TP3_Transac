@@ -40,7 +40,7 @@ public class AdminController {
 
     @PostMapping("/register-client")
     public String postRegisterClientRequest(@ModelAttribute ClientForm clientForm, Model model, BindingResult errors, RedirectAttributes redirectAttributes){
-        adminService.saveClient(clientForm.getUsername(),clientForm.getPassword(),clientForm.getEmail());
+        adminService.saveClient(clientForm.getUsername().trim(),clientForm.getPassword(),clientForm.getEmail().trim());
         return "redirect:clients";
     }
 }
