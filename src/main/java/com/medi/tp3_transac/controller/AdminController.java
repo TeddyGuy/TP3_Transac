@@ -21,7 +21,14 @@ public class AdminController {
 
     @GetMapping("/clients")
     public String getClientsRequest(Model model){
+        model.addAttribute("pageTitle","JavaTown Library System");
         model.addAttribute("clients",adminService.findAllClients());
         return "clients";
+    }
+
+    @GetMapping("/register-client")
+    public String getRegisterClientRequest(Model model){
+        model.addAttribute("pageTitle","JavaTown Library System");
+        return "register-client";
     }
 }
