@@ -8,14 +8,10 @@ import com.medi.tp3_transac.service.AdminService;
 import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import java.util.Optional;
 
 @Controller
 public class AdminController {
@@ -41,7 +37,7 @@ public class AdminController {
     @GetMapping("/client/{id}/borrowing-history")
     public String getClientDocumentLoanHistory(Model model, @PathVariable String id){
         model.addAttribute("pageTitle","JavaTown Library System");
-        model.addAttribute("client",adminService.findClientByIdWithBorrowingHistory(Long.parseLong(id)).get());
+        model.addAttribute("client",adminService.findClientByIdWithBorrowingHistory(Long.parseLong(id)));
         return "client-borrowing-history";
     }
 

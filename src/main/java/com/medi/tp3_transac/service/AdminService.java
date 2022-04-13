@@ -56,8 +56,12 @@ public class AdminService {
         return this.clientRepository.findById(id);
     }
 
-    public Optional<Client> findClientByIdWithBorrowingHistory(long id){
-        return this.clientRepository.findByIdWithDocumentLoans(id);
+    public Client findClientByIdWithBorrowingHistory(long id){
+        Client client = this.clientRepository.findById(id).get();
+
+        System.out.println(client.getDocumentLoans());
+
+        return client;
     }
 
     public int addCopiesToDocumentWithId(int nbCopies, long documentId){

@@ -17,6 +17,7 @@
     </ul>
     <div th:switch="${client.documentLoans.size() > 0}" class="w-50 m-auto my-5">
         <div th:case="${true}">
+            <h2>Emprunts</h2>
             <table class="table table-borderless table-hover">
                 <thead class="table-dark">
                     <th>ID</th>
@@ -26,7 +27,7 @@
                     <th>Date de retour</th>
                 </thead>
                 <tbody>
-                    <th:block th:each="dl, stat : ${client.documentLoans}">
+                    <th:block th:each="dl : ${client.documentLoans}">
                         <tr>
                             <td th:text="${dl.id}"></td>
                             <td>
@@ -39,7 +40,14 @@
                             </td>
                             <td th:text="${dl.lendingDate}"></td>
                             <td th:text="${dl.expectedReturnDate}"></td>
-                            <td th:text="${dl.actualReturnDate}"></td>
+                            <div th:switch="${dl.actualReturnDate != null}">
+                                <div th:case="${true}">
+                                    <td th:text="${dl.actualReturnDate}"></td>
+                                </div>
+                                <div th:case="*">
+                                    <td><a th:href="@{'/return-document/' + ${dl.id}}" method="post" class="btn btn-primary">Retourner</a></td>
+                                </div>
+                            </div>
                         </tr>
                     </th:block>
                 </tbody>

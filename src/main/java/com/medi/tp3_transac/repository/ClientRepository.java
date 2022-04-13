@@ -8,6 +8,8 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 public interface ClientRepository extends JpaRepository<Client, Long> {
-    @Query("select c from Client c LEFT JOIN FETCH c.documentLoans dl where c.id = :clientId")
+    @Query("select c " +
+            "from Client c " +
+            "LEFT JOIN FETCH c.documentLoans cdl where c.id = :clientId")
     Optional<Client> findByIdWithDocumentLoans(@Param("clientId") long clientId);
 }
