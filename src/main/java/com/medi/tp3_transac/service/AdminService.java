@@ -6,10 +6,7 @@ import com.medi.tp3_transac.model.document.CD;
 import com.medi.tp3_transac.model.document.DVD;
 import com.medi.tp3_transac.model.document.Document;
 import com.medi.tp3_transac.model.user.Client;
-import com.medi.tp3_transac.repository.BookRepository;
-import com.medi.tp3_transac.repository.ClientRepository;
-import com.medi.tp3_transac.repository.DocumentLoanRepository;
-import com.medi.tp3_transac.repository.DocumentRepository;
+import com.medi.tp3_transac.repository.*;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -22,11 +19,14 @@ public class AdminService {
     private DocumentRepository documentRepository;
     private DocumentLoanRepository documentLoanRepository;
     private BookRepository bookRepository;
+    private CDRepository cdRepository;
 
     public AdminService(ClientRepository clientRepository,
                         DocumentRepository documentRepository,
                         DocumentLoanRepository documentLoanRepository,
-                        BookRepository bookRepository) {
+                        BookRepository bookRepository,
+                        CDRepository cdRepository) {
+        this.cdRepository = cdRepository;
         this.clientRepository = clientRepository;
         this.documentRepository = documentRepository;
         this.documentLoanRepository = documentLoanRepository;
@@ -45,6 +45,8 @@ public class AdminService {
         return this.documentRepository.save(new DVD(title,author,genre,publicationYear)).getId();
     }
 
+
+
     public List<Document> findAllDocuments(){
         return this.documentRepository.findAll();
     }
@@ -52,6 +54,8 @@ public class AdminService {
     public List<Book> findAllBooks(){
         return this.bookRepository.findAll();
     }
+
+    public List<CD> findAllCDs(){ return this.cdRepository.findAll();}
 
     public Client findClientById(long id){
         return this.clientRepository.findById(id).get();

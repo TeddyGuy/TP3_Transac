@@ -14,6 +14,9 @@
     <li>
         <a th:href="@{'/add-book'}">Ajouter un livre</a>
     </li>
+    <li>
+        <a th:href="@{'/add-cd'}">Ajouter un CD</a>
+    </li>
 </ul>
 <div th:if="${books.size() > 0}" class="w-50 m-auto my-5">
     <h2>Livres : <span th:text="${books.size()}"></span></h2>
@@ -29,7 +32,7 @@
         <th>Copies disponibles</th>
         </thead>
         <tbody>
-        <th:block th:each="book, stat : ${books}">
+        <th:block th:each="book : ${books}">
             <tr>
                 <td th:text="${book.id}"></td>
                 <td th:text="${book.title}"></td>
@@ -44,6 +47,30 @@
         </tbody>
     </table>
 </div>
-
+<div th:if="${cds.size() > 0}" class="w-50 m-auto my-5">
+    <h2>CDs : <span th:text="${cds.size()}"></span></h2>
+    <table class="table table-borderless table-hover">
+        <thead class="table-dark">
+        <th>ID</th>
+        <th>Titre</th>
+        <th>Auteur</th>
+        <th>Genre</th>
+        <th>Année de publication</th>
+        <th>Copies disponibles</th>
+        </thead>
+        <tbody>
+        <th:block th:each="cd : ${cds}">
+            <tr>
+                <td th:text="${cd.id}"></td>
+                <td th:text="${cd.title}"></td>
+                <td th:text="${cd.author}"></td>
+                <td th:text="${cd.genre}"></td>
+                <td th:text="${cd.publicationYear}"></td>
+                <td th:text="${cd.copies}"></td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>

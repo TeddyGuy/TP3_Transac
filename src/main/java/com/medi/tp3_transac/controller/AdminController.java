@@ -2,6 +2,7 @@ package com.medi.tp3_transac.controller;
 
 import com.medi.tp3_transac.dto.BookForm;
 import com.medi.tp3_transac.dto.ClientForm;
+import com.medi.tp3_transac.dto.DiscForm;
 import com.medi.tp3_transac.dto.DocumentLoanForm;
 import com.medi.tp3_transac.service.AdminService;
 import org.springframework.stereotype.Controller;
@@ -52,12 +53,13 @@ public class AdminController {
     @GetMapping("/documents")
     public String getDocumentsRequest(Model model){
         model.addAttribute("pageTitle","JavaTown Library System");
+        model.addAttribute("cds",adminService.findAllCDs());
         model.addAttribute("books", adminService.findAllBooks());
         return "documents";
     }
 
     @GetMapping("/add-book")
-    public String getAddDocumentRequest(Model model){
+    public String getAddBookRequest(Model model){
         model.addAttribute("pageTitle","JavaTown Library System");
         model.addAttribute("bookForm", new BookForm());
         return "add-book";
@@ -66,6 +68,19 @@ public class AdminController {
     @PostMapping("/add-book")
     public String postAddBook(@ModelAttribute BookForm bookForm){
         adminService.saveBook(bookForm.getTitle(),bookForm.getAuthor(),bookForm.getGenre(),bookForm.getPublicationYear(),bookForm.getPublisher(), bookForm.getPages());
+        return "redirect:documents";
+    }
+
+    @GetMapping("/add-cd")
+    public String getAddCdRequest(Model model){
+        model.addAttribute("pageTitle","JavaTown Library System");
+        model.addAttribute("discForm", new DiscForm());
+        return "add-cd";
+    }
+
+    @PostMapping("/add-cd")
+    public String postAddCd(@ModelAttribute DiscForm discForm){
+        adminService.saveCD(discForm.getTitle(),discForm.getAuthor(),discForm.getGenre(),discForm.getPublicationYear());
         return "redirect:documents";
     }
 
