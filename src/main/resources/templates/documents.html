@@ -22,6 +22,32 @@
         <a th:href="@{'/add-dvd'}">Ajouter un DVD</a>
     </li>
 </ul>
+<div>
+    <form action="#" th:action="@{/documents}" th:object="${documentSearchForm}" method="post" class="w-50 m-auto my-5">
+        <div class="input-group mb-3">
+            <span class="input-group-text">Titre</span>
+            <input type="text" class="form-control" th:field="*{title}" required>
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text">Auteur</label>
+            <input type="text" class="form-control" th:field="*{author}" required>
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text">Genre</label>
+            <input type="text" class="form-control" th:field="*{genre}" required>
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text">Année de publication</label>
+            <input type="number" class="form-control" th:field="*{publicationYear}" required>
+        </div>
+        <div class="text-center">
+            <input type="submit" class="btn btn-success" value="Rechercher">
+        </div>
+    </form>
+    <div class="text-center">
+        <a th:href="@{'/documents'}" class="btn btn-primary">Afficher tout les documents</a>
+    </div>
+</div>
 <div th:if="${books.size() > 0}" class="w-50 m-auto my-5">
     <h2>Livres : <span th:text="${books.size()}"></span></h2>
     <table class="table table-borderless table-hover">

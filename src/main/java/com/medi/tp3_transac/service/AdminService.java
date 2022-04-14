@@ -62,6 +62,19 @@ public class AdminService {
 
     public List<DVD> findAllDVDs(){return this.dvdRepository.findAll();}
 
+    public List<Book> bookSearch(String title, String author, String genre, int publicationYear){
+        return this.bookRepository.findAllByTitleAndAuthorAndGenreAndPublicationYear(title,author,genre,publicationYear);
+    }
+
+    public List<CD> cdSearch(String title, String author, String genre, int publicationYear){
+        return this.cdRepository.findAllByTitleAndAuthorAndGenreAndPublicationYear(title,author,genre,publicationYear);
+    }
+
+    public List<DVD> dvdSearch(String title, String author, String genre, int publicationYear){
+        return this.dvdRepository.findAllByTitleAndAuthorAndGenreAndPublicationYear(title,author,genre,publicationYear);
+    }
+
+
     public Client findClientById(long id){
         return this.clientRepository.findById(id).get();
     }

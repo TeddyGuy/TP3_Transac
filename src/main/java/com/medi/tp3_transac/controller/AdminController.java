@@ -1,9 +1,6 @@
 package com.medi.tp3_transac.controller;
 
-import com.medi.tp3_transac.dto.BookForm;
-import com.medi.tp3_transac.dto.ClientForm;
-import com.medi.tp3_transac.dto.DiscForm;
-import com.medi.tp3_transac.dto.DocumentLoanForm;
+import com.medi.tp3_transac.dto.*;
 import com.medi.tp3_transac.service.AdminService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,9 +50,37 @@ public class AdminController {
     @GetMapping("/documents")
     public String getDocumentsRequest(Model model){
         model.addAttribute("pageTitle","JavaTown Library System");
+        model.addAttribute("documentSearchForm", new DocumentSearchForm());
         model.addAttribute("cds",adminService.findAllCDs());
         model.addAttribute("dvds",adminService.findAllDVDs());
         model.addAttribute("books", adminService.findAllBooks());
+        return "documents";
+    }
+
+    @PostMapping("/documents")
+    public String postDocumentsRequest(@ModelAttribute DocumentSearchForm documentSearchForm, Model model){
+        model.addAttribute("pageTitle","JavaTown Library System");
+        model.addAttribute("documentSearchForm", documentSearchForm);
+        System.out.println(documentSearchForm);
+        System.out.println(adminService.bookSearch(documentSearchForm.getTitle(),
+                documentSearchForm.getAuthor(),
+                documentSearchForm.getGenre(),
+                documentSearchForm.getPublicationYear()));
+        model.addAttribute("cds",adminService.cdSearch(
+                documentSearchForm.getTitle(),
+                documentSearchForm.getAuthor(),
+                documentSearchForm.getGenre(),
+                documentSearchForm.getPublicationYear()));
+        model.addAttribute("dvds",adminService.dvdSearch(
+                documentSearchForm.getTitle(),
+                documentSearchForm.getAuthor(),
+                documentSearchForm.getGenre(),
+                documentSearchForm.getPublicationYear()));
+        model.addAttribute("books", adminService.bookSearch(
+                documentSearchForm.getTitle(),
+                documentSearchForm.getAuthor(),
+                documentSearchForm.getGenre(),
+                documentSearchForm.getPublicationYear()));
         return "documents";
     }
 
