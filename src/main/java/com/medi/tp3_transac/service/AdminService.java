@@ -12,6 +12,7 @@ import com.medi.tp3_transac.repository.DocumentLoanRepository;
 import com.medi.tp3_transac.repository.DocumentRepository;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,14 +53,12 @@ public class AdminService {
         return this.bookRepository.findAll();
     }
 
-    public Optional<Client> findClientById(long id){
-        return this.clientRepository.findById(id);
+    public Client findClientById(long id){
+        return this.clientRepository.findById(id).get();
     }
 
     public Client findClientByIdWithBorrowingHistory(long id){
         Client client = this.clientRepository.findById(id).get();
-
-        System.out.println(client.getDocumentLoans());
 
         return client;
     }
@@ -86,7 +85,6 @@ public class AdminService {
             this.documentLoanRepository.save(documentLoan);
             this.documentRepository.save(document);
         }
-
     }
 
     public long saveClient(String username, String password, String email){
@@ -95,5 +93,18 @@ public class AdminService {
 
     public List<Client> findAllClients(){
         return this.clientRepository.findAll();
+    }
+
+    public DocumentLoan findDocumentLoanById(long id){
+        return this.documentLoanRepository.findById(id).get();
+    }
+
+    public void returnDocument(long documentLoanId){
+        DocumentLoan documentLoan = this.documentLoanRepository.findById(documentLoanId).get();
+        Document document = documentLoan.getDocument();
+        document.setCopies(document.getCopies() + 1);
+        documentLoan.setActualReturnDate(LocalDate.now());
+        this.documentLoanRepository.save(documentLoan);
+        this.documentRepository.save(document);
     }
 }

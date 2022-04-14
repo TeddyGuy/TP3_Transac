@@ -3,15 +3,10 @@ package com.medi.tp3_transac.controller;
 import com.medi.tp3_transac.dto.BookForm;
 import com.medi.tp3_transac.dto.ClientForm;
 import com.medi.tp3_transac.dto.DocumentLoanForm;
-import com.medi.tp3_transac.model.user.Client;
 import com.medi.tp3_transac.service.AdminService;
-import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class AdminController {
@@ -85,5 +80,11 @@ public class AdminController {
     public String postLendDocumentRequest(@ModelAttribute DocumentLoanForm documentLoanForm){
         adminService.lendDocumentByIdToClientById(documentLoanForm.getDocumentId(),documentLoanForm.getClientId());
         return "redirect:/client/" + documentLoanForm.getClientId() + "/borrowing-history";
+    }
+
+    @GetMapping("/return-document/{documentLoanId}")
+    public String postReturnDocumentRequest(@PathVariable long documentLoanId){
+        adminService.returnDocument(documentLoanId);
+        return "redirect:/client/" + adminService.findDocumentLoanById(documentLoanId).getClient().getId() + "/borrowing-history";
     }
 }

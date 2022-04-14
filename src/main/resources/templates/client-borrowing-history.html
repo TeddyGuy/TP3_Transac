@@ -45,7 +45,9 @@
                                     <td th:text="${dl.actualReturnDate}"></td>
                                 </div>
                                 <div th:case="*">
-                                    <td><a th:href="@{'/return-document/' + ${dl.id}}" method="post" class="btn btn-primary">Retourner</a></td>
+                                    <td>
+                                        <a th:href="@{'/return-document/' + ${dl.id}}" class="btn btn-primary">Retourner</a>
+                                    </td>
                                 </div>
                             </div>
                         </tr>
