@@ -54,6 +54,7 @@ public class AdminController {
     public String getDocumentsRequest(Model model){
         model.addAttribute("pageTitle","JavaTown Library System");
         model.addAttribute("cds",adminService.findAllCDs());
+        model.addAttribute("dvds",adminService.findAllDVDs());
         model.addAttribute("books", adminService.findAllBooks());
         return "documents";
     }
@@ -79,8 +80,21 @@ public class AdminController {
     }
 
     @PostMapping("/add-cd")
-    public String postAddCd(@ModelAttribute DiscForm discForm){
+    public String postAddDVD(@ModelAttribute DiscForm discForm){
         adminService.saveCD(discForm.getTitle(),discForm.getAuthor(),discForm.getGenre(),discForm.getPublicationYear());
+        return "redirect:documents";
+    }
+
+    @GetMapping("/add-dvd")
+    public String getAddDVDRequest(Model model){
+        model.addAttribute("pageTitle","JavaTown Library System");
+        model.addAttribute("discForm", new DiscForm());
+        return "add-dvd";
+    }
+
+    @PostMapping("/add-dvd")
+    public String postAddCd(@ModelAttribute DiscForm discForm) {
+        adminService.saveDVD(discForm.getTitle(), discForm.getAuthor(), discForm.getGenre(), discForm.getPublicationYear());
         return "redirect:documents";
     }
 

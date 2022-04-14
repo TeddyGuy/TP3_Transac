@@ -20,17 +20,20 @@ public class AdminService {
     private DocumentLoanRepository documentLoanRepository;
     private BookRepository bookRepository;
     private CDRepository cdRepository;
+    private DVDRepository dvdRepository;
 
     public AdminService(ClientRepository clientRepository,
                         DocumentRepository documentRepository,
                         DocumentLoanRepository documentLoanRepository,
                         BookRepository bookRepository,
-                        CDRepository cdRepository) {
+                        CDRepository cdRepository,
+                        DVDRepository dvdRepository) {
         this.cdRepository = cdRepository;
         this.clientRepository = clientRepository;
         this.documentRepository = documentRepository;
         this.documentLoanRepository = documentLoanRepository;
         this.bookRepository = bookRepository;
+        this.dvdRepository = dvdRepository;
     }
 
     public long saveBook(String title, String author, String genre, int publicationYear, String publisher, int pages){
@@ -56,6 +59,8 @@ public class AdminService {
     }
 
     public List<CD> findAllCDs(){ return this.cdRepository.findAll();}
+
+    public List<DVD> findAllDVDs(){return this.dvdRepository.findAll();}
 
     public Client findClientById(long id){
         return this.clientRepository.findById(id).get();
