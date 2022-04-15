@@ -124,6 +124,20 @@ public class AdminController {
         return "redirect:/documents";
     }
 
+    @GetMapping("/edit-cd/{id}")
+    public String getEditCDRequest(Model model, @PathVariable long id){
+        model.addAttribute("pageTitle","JavaTown Library System");
+        model.addAttribute("id",id);
+        model.addAttribute("discEditForm", new DiscEditForm(adminService.findCDById(id)));
+        return "edit-cd";
+    }
+
+    @PostMapping("/edit-cd/{id}")
+    public String postEditCDRequest(@ModelAttribute DiscEditForm discEditForm, @PathVariable long id){
+        adminService.editCDById(id,discEditForm);
+        return "redirect:/documents";
+    }
+
     @GetMapping("/add-dvd")
     public String getAddDVDRequest(Model model){
         model.addAttribute("pageTitle","JavaTown Library System");

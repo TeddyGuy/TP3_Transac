@@ -1,6 +1,7 @@
 package com.medi.tp3_transac.service;
 
 import com.medi.tp3_transac.dto.BookEditForm;
+import com.medi.tp3_transac.dto.DiscEditForm;
 import com.medi.tp3_transac.model.DocumentLoan;
 import com.medi.tp3_transac.model.document.Book;
 import com.medi.tp3_transac.model.document.CD;
@@ -80,6 +81,20 @@ public class AdminService {
     }
 
     public List<CD> findAllCDs(){ return this.cdRepository.findAll();}
+
+    public CD findCDById(long id){
+        return this.cdRepository.findById(id).get();
+    }
+
+    public void editCDById(long id, DiscEditForm discEditForm){
+        CD cd = this.cdRepository.findById(id).get();
+        cd.setTitle(discEditForm.getTitle());
+        cd.setAuthor(discEditForm.getAuthor());
+        cd.setGenre(discEditForm.getGenre());
+        cd.setPublicationYear(discEditForm.getPublicationYear());
+        cd.setCopies(discEditForm.getCopies());
+        this.cdRepository.save(cd);
+    }
 
     public List<DVD> findAllDVDs(){return this.dvdRepository.findAll();}
 

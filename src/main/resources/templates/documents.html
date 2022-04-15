@@ -102,6 +102,9 @@
                 <td th:text="${cd.genre}"></td>
                 <td th:text="${cd.publicationYear}"></td>
                 <td th:text="${cd.copies}"></td>
+                <td>
+                    <a th:href="@{'/edit-cd/' + ${cd.id}}">Modifier</a>
+                </td>
             </tr>
         </th:block>
         </tbody>
@@ -128,6 +131,9 @@
                 <td th:text="${dvd.genre}"></td>
                 <td th:text="${dvd.publicationYear}"></td>
                 <td th:text="${dvd.copies}"></td>
+                <td>
+                    <a th:href="@{'/edit-dvd/' + ${dvd.id}}">Modifier</a>
+                </td>
             </tr>
         </th:block>
         </tbody>
