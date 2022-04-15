@@ -1,5 +1,6 @@
 package com.medi.tp3_transac.service;
 
+import com.medi.tp3_transac.dto.BookEditForm;
 import com.medi.tp3_transac.model.DocumentLoan;
 import com.medi.tp3_transac.model.document.Book;
 import com.medi.tp3_transac.model.document.CD;
@@ -40,6 +41,10 @@ public class AdminService {
         return this.documentRepository.save(new Book(title,author,genre,publicationYear,publisher,pages)).getId();
     }
 
+    public void saveDocument(Document document){
+        this.documentRepository.save(document);
+    }
+
     public long saveCD(String title, String author, String genre, int publicationYear){
         return this.documentRepository.save(new CD(title,author,genre,publicationYear)).getId();
     }
@@ -56,6 +61,22 @@ public class AdminService {
 
     public List<Book> findAllBooks(){
         return this.bookRepository.findAll();
+    }
+
+    public void editBookById(long id, BookEditForm bookEditForm){
+        Book book = this.bookRepository.findById(id).get();
+        book.setTitle(bookEditForm.getTitle());
+        book.setAuthor(bookEditForm.getAuthor());
+        book.setGenre(bookEditForm.getGenre());
+        book.setPublicationYear(bookEditForm.getPublicationYear());
+        book.setPublisher(bookEditForm.getPublisher());
+        book.setPages(bookEditForm.getPages());
+        book.setCopies(bookEditForm.getCopies());
+        this.bookRepository.save(book);
+    }
+
+    public Book findBookById(long id){
+        return this.bookRepository.findById(id).get();
     }
 
     public List<CD> findAllCDs(){ return this.cdRepository.findAll();}
@@ -83,17 +104,6 @@ public class AdminService {
         Client client = this.clientRepository.findById(id).get();
 
         return client;
-    }
-
-    public int addCopiesToDocumentWithId(int nbCopies, long documentId){
-        Optional<Document> potentialDocument = this.documentRepository.findById(documentId);
-        if(potentialDocument.isPresent()){
-            Document document;
-            document = potentialDocument.get();
-            document.setCopies(document.getCopies() + nbCopies);
-            return this.documentRepository.save(document).getCopies();
-        }
-        return -1;
     }
 
     public void lendDocumentByIdToClientById(long documentId, long clientId){

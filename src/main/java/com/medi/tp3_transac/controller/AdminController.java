@@ -94,7 +94,21 @@ public class AdminController {
     @PostMapping("/add-book")
     public String postAddBook(@ModelAttribute BookForm bookForm){
         adminService.saveBook(bookForm.getTitle(),bookForm.getAuthor(),bookForm.getGenre(),bookForm.getPublicationYear(),bookForm.getPublisher(), bookForm.getPages());
-        return "redirect:documents";
+        return "redirect:/documents";
+    }
+
+    @GetMapping("/edit-book/{id}")
+    public String getEditBookRequest(Model model, @PathVariable long id){
+        model.addAttribute("pageTitle","JavaTown Library System");
+        model.addAttribute("id",id);
+        model.addAttribute("bookEditForm", new BookEditForm(adminService.findBookById(id)));
+        return "edit-book";
+    }
+
+    @PostMapping("/edit-book/{id}")
+    public String postEditBookRequest(@ModelAttribute BookEditForm bookEditForm, @PathVariable long id){
+        adminService.editBookById(id,bookEditForm);
+        return "redirect:/documents";
     }
 
     @GetMapping("/add-cd")
@@ -107,7 +121,7 @@ public class AdminController {
     @PostMapping("/add-cd")
     public String postAddDVD(@ModelAttribute DiscForm discForm){
         adminService.saveCD(discForm.getTitle(),discForm.getAuthor(),discForm.getGenre(),discForm.getPublicationYear());
-        return "redirect:documents";
+        return "redirect:/documents";
     }
 
     @GetMapping("/add-dvd")
@@ -120,7 +134,7 @@ public class AdminController {
     @PostMapping("/add-dvd")
     public String postAddCd(@ModelAttribute DiscForm discForm) {
         adminService.saveDVD(discForm.getTitle(), discForm.getAuthor(), discForm.getGenre(), discForm.getPublicationYear());
-        return "redirect:documents";
+        return "redirect:/documents";
     }
 
     @GetMapping("/lend-document")

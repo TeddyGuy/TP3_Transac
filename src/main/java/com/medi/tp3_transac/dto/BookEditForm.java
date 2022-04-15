@@ -8,20 +8,22 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class BookForm {
+public class BookEditForm {
     private String title;
     private String author;
     private String genre;
     private int publicationYear;
     private String publisher;
     private int pages;
+    private int copies;
 
-    public BookForm(Book book){
+    public BookEditForm(Book book){
         this.title = book.getTitle();
         this.author = book.getAuthor();
         this.genre = book.getGenre();
         this.publicationYear = book.getPublicationYear();
         this.publisher = book.getPublisher();
         this.pages = book.getPages();
+        this.copies = book.getCopies();
     }
 }

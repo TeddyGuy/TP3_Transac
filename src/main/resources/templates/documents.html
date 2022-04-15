@@ -38,7 +38,7 @@
         </div>
         <div class="input-group mb-3">
             <label class="input-group-text">Année de publication</label>
-            <input type="number" class="form-control" th:field="*{publicationYear}" required>
+            <input type="number" min="0" class="form-control" th:field="*{publicationYear}" required>
         </div>
         <div class="text-center">
             <input type="submit" class="btn btn-success" value="Rechercher">
@@ -60,6 +60,7 @@
         <th>Maison d'édition</th>
         <th>Pages</th>
         <th>Copies disponibles</th>
+        <th>Modifier</th>
         </thead>
         <tbody>
         <th:block th:each="book : ${books}">
@@ -72,6 +73,9 @@
                 <td th:text="${book.publisher}"></td>
                 <td th:text="${book.pages}"></td>
                 <td th:text="${book.copies}"></td>
+                <td>
+                    <a th:href="@{'/edit-book/' + ${book.id}}">Modifier</a>
+                </td>
             </tr>
         </th:block>
         </tbody>
@@ -87,6 +91,7 @@
         <th>Genre</th>
         <th>Année de publication</th>
         <th>Copies disponibles</th>
+        <th>Modifier</th>
         </thead>
         <tbody>
         <th:block th:each="cd : ${cds}">
@@ -112,6 +117,7 @@
         <th>Genre</th>
         <th>Année de publication</th>
         <th>Copies disponibles</th>
+        <th>Modifier</th>
         </thead>
         <tbody>
         <th:block th:each="dvd : ${dvds}">
