@@ -98,6 +98,20 @@ public class AdminService {
 
     public List<DVD> findAllDVDs(){return this.dvdRepository.findAll();}
 
+    public DVD findDVDById(long id){
+        return this.dvdRepository.findById(id).get();
+    }
+
+    public void editDVDById(long id, DiscEditForm discEditForm){
+        DVD dvd = this.dvdRepository.findById(id).get();
+        dvd.setTitle(discEditForm.getTitle());
+        dvd.setAuthor(discEditForm.getAuthor());
+        dvd.setGenre(discEditForm.getGenre());
+        dvd.setPublicationYear(discEditForm.getPublicationYear());
+        dvd.setCopies(discEditForm.getCopies());
+        this.dvdRepository.save(dvd);
+    }
+
     public List<Book> bookSearch(String title, String author, String genre, int publicationYear){
         return this.bookRepository.findAllByTitleAndAuthorAndGenreAndPublicationYear(title,author,genre,publicationYear);
     }
