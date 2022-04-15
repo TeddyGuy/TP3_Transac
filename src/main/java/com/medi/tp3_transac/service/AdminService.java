@@ -42,22 +42,12 @@ public class AdminService {
         return this.documentRepository.save(new Book(title,author,genre,publicationYear,publisher,pages)).getId();
     }
 
-    public void saveDocument(Document document){
-        this.documentRepository.save(document);
-    }
-
     public long saveCD(String title, String author, String genre, int publicationYear){
         return this.documentRepository.save(new CD(title,author,genre,publicationYear)).getId();
     }
 
     public long saveDVD(String title, String author, String genre, int publicationYear){
         return this.documentRepository.save(new DVD(title,author,genre,publicationYear)).getId();
-    }
-
-
-
-    public List<Document> findAllDocuments(){
-        return this.documentRepository.findAll();
     }
 
     public List<Book> findAllBooks(){
@@ -126,11 +116,6 @@ public class AdminService {
 
     public Document findDocumentById(long id){
         return this.documentRepository.findById(id).get();
-    }
-
-
-    public Client findClientById(long id){
-        return this.clientRepository.findById(id).get();
     }
 
     public Client findClientByIdWithBorrowingHistory(long id){

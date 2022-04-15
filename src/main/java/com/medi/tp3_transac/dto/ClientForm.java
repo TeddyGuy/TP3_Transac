@@ -12,8 +12,4 @@ public class ClientForm {
     private String username;
     private String password;
     private String email;
-
-    public Client toClient(){
-        return new Client(this.username,this.password,this.email);
-    }
 }
