@@ -124,6 +124,10 @@ public class AdminService {
         return this.dvdRepository.findAllByTitleAndAuthorAndGenreAndPublicationYear(title,author,genre,publicationYear);
     }
 
+    public Document findDocumentById(long id){
+        return this.documentRepository.findById(id).get();
+    }
+
 
     public Client findClientById(long id){
         return this.clientRepository.findById(id).get();
@@ -167,5 +171,13 @@ public class AdminService {
         documentLoan.setActualReturnDate(LocalDate.now());
         this.documentLoanRepository.save(documentLoan);
         this.documentRepository.save(document);
+    }
+
+    public boolean clientExistsById(long id){
+        return this.clientRepository.existsById(id);
+    }
+
+    public boolean documentExistsById(long id){
+        return this.documentRepository.existsById(id);
     }
 }

@@ -4,6 +4,7 @@ import com.medi.tp3_transac.dto.*;
 import com.medi.tp3_transac.service.AdminService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
@@ -173,7 +174,24 @@ public class AdminController {
     }
 
     @PostMapping("/lend-document")
-    public String postLendDocumentRequest(@ModelAttribute DocumentLoanForm documentLoanForm){
+    public String postLendDocumentRequest(@ModelAttribute DocumentLoanForm documentLoanForm, Model model){
+        boolean errorFound = false;
+        if(!adminService.clientExistsById(documentLoanForm.getClientId())){
+            model.addAttribute("clientErrorMessage","Client inexsistant");
+            errorFound = true;
+        }
+        if(!adminService.documentExistsById(documentLoanForm.getDocumentId())){
+            model.addAttribute("documentErrorMessage","Document inexstant");
+            errorFound = true;
+        }
+        else if(adminService.findDocumentById(documentLoanForm.getDocumentId()).getCopies() < 1){
+            model.addAttribute("documentErrorMessage","Aucun exemplaire restant");
+            errorFound = true;
+        }
+
+        if(errorFound){
+            return "lend-document";
+        }
         adminService.lendDocumentByIdToClientById(documentLoanForm.getDocumentId(),documentLoanForm.getClientId());
         return "redirect:/client/" + documentLoanForm.getClientId() + "/borrowing-history";
     }
